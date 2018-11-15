@@ -3,15 +3,95 @@ package com.justcode.hxl.localstorage.storage.ExternalStorage;
 import android.content.Context;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import static android.os.Environment.getExternalStorageState;
 
 public class ExternalStorage {
 
     private static final String TAG = "ExternalStorage";
+
+    /**
+     * 文件写入sd卡（最常使用）
+     */
+    public static void write(String content, String fileName) {
+        FileOutputStream fileOutputStream = null;
+        if(TextUtils.isEmpty(content)){
+            content = "您没有写入数据，默认写入本条数据";
+        }
+        if(TextUtils.isEmpty(fileName)){
+            fileName = "external.txt";
+        }
+        try {
+            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+
+                File file = Environment.getExternalStorageDirectory();
+                fileOutputStream = new FileOutputStream(file.getCanonicalPath() + "/" + fileName);
+                fileOutputStream.write(content.getBytes());
+            } else {
+                Log.d(TAG, "sd卡，不可读写");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fileOutputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 从sd卡读出文件（最常使用）
+     */
+    public static String read(String fileName) {
+
+        if(TextUtils.isEmpty(fileName)){
+            fileName = "external.txt";
+        }
+        StringBuffer stringBuffer = new StringBuffer();
+        FileInputStream fileInputStream = null;
+        try {
+            //SD卡是否可用，存在
+            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                File file = new File(Environment.getExternalStorageDirectory().getCanonicalPath() + "/" + fileName);
+                //文件是否存在
+                if (file.exists()) {
+                    fileInputStream = new FileInputStream(file);
+                    InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String str;
+                    while ((str = bufferedReader.readLine()) != null) {
+                        stringBuffer.append(str);
+                    }
+                } else {
+                    Log.d(TAG, "目录下，不存在该文件");
+                }
+            } else {
+                Log.d(TAG, "sd卡不存在或不可用");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fileInputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return stringBuffer.toString();
+    }
+
 
     /**
      * 判断外部设置是否有效
@@ -96,7 +176,7 @@ public class ExternalStorage {
      *             Environment#DIRECTORY_NOTIFICATIONS}, {@link
      *             Environment#DIRECTORY_PICTURES}, or {@link
      *             Environment#DIRECTORY_MOVIES}.
-     *
+     *             <p>
      *             如果您不需要特定的媒体目录，请传递 null 以接收应用私有目录的根目录。
      * @return /storage/emulated/0/Android/data/包名/files/{type}
      */

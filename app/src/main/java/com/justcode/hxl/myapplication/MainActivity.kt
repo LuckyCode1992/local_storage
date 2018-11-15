@@ -5,12 +5,15 @@ import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.justcode.hxl.localstorage.sharedpreferences.PropertyBySharedPref
+import com.justcode.hxl.localstorage.storage.ExternalStorage.ExternalStorage
 import com.justcode.hxl.localstorage.storage.InternalStorage.InternalStorage
 import com.justcode.hxl.permission.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    var input by PropertyBySharedPref(default = "")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,6 +30,20 @@ class MainActivity : AppCompatActivity() {
         }
         btn_get_internal.setOnClickListener {
             tv_internal_read.text = InternalStorage.readFileData(this, "internal.txt")
+        }
+
+        btn_save_sp.setOnClickListener {
+            input = et_sp_write.text.toString()
+        }
+        btn_get_sp.setOnClickListener {
+            tv_sp_read.text = input
+        }
+
+        btn_save_external.setOnClickListener {
+            ExternalStorage.write(et_exteranal_write.text.toString(), "externalStroage.txt")
+        }
+        btn_get_external.setOnClickListener {
+            tv_external_read.text = ExternalStorage.read("externalStroage.txt")
         }
     }
 }

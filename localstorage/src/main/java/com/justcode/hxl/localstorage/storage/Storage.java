@@ -66,6 +66,14 @@ public class Storage {
         long externalDataSize = getDirSize(ExternalStorage.getDataPkgDir(context));
         return internalDataSize + externalDataSize;
     }
+    public static long getInternalDataSize(Context context){
+        long internalDataSize = getDirSize(InternalStorage.getDataDir(context));
+        return internalDataSize;
+    }
+    public static long getExternalDataSize(Context context){
+        long externalDataSize = getDirSize(ExternalStorage.getDataPkgDir(context));
+        return externalDataSize;
+    }
 
     /**
      * 清除数据：

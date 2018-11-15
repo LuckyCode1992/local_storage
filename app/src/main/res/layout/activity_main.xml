@@ -150,7 +150,7 @@
                     android:id="@+id/btn_get_internal_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="获取内部存储size" />
+                    android:text="获取内部存储文件size" />
             </LinearLayout>
 
             <LinearLayout
@@ -169,7 +169,7 @@
                     android:id="@+id/btn_get_external_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="获取外部存储size" />
+                    android:text="获取外部存储文件size" />
             </LinearLayout>
 
             <LinearLayout
@@ -188,7 +188,7 @@
                     android:id="@+id/btn_get_storage_size"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="获取存储size" />
+                    android:text="获取存储文件size" />
             </LinearLayout>
 
             <Button

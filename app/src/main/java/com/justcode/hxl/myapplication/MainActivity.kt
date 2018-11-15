@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.justcode.hxl.localstorage.sharedpreferences.PropertyBySharedPref
 import com.justcode.hxl.localstorage.storage.ExternalStorage.ExternalStorage
 import com.justcode.hxl.localstorage.storage.InternalStorage.InternalStorage
+import com.justcode.hxl.localstorage.storage.Storage
 import com.justcode.hxl.permission.RxPermissions
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -44,6 +45,26 @@ class MainActivity : AppCompatActivity() {
         }
         btn_get_external.setOnClickListener {
             tv_external_read.text = ExternalStorage.read("externalStroage.txt")
+        }
+
+        btn_get_internal_size.setOnClickListener {
+            tv_internal_size.text = ""+Storage.getInternalDataSize(this)+"字节"
+        }
+        btn_get_external_size.setOnClickListener {
+            tv_external_size.text = " "+ Storage.getExternalDataSize(this)+"字节"
+        }
+        btn_get_storage_size.setOnClickListener {
+            tv_storage_size.text = ""+Storage.getDataSize(this)+"字节"
+        }
+
+        btn_clear_Internal.setOnClickListener {
+            Storage.clearInternalData(this)
+        }
+        btn_clear_External.setOnClickListener {
+            Storage.clearExternalData(this)
+        }
+        btn_clear_storage.setOnClickListener {
+            Storage.clearData(this)
         }
     }
 }

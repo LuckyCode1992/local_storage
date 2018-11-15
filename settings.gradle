@@ -1,1 +1,1 @@
-include ':app', ':localstorage'
+include ':app', ':localstorage', ':permission'

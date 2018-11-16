@@ -2,6 +2,7 @@ package com.justcode.hxl.myapplication
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -48,13 +49,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         btn_get_internal_size.setOnClickListener {
-            tv_internal_size.text = ""+Storage.getInternalDataSize(this)+"字节"
+            tv_internal_size.text = "" + Storage.getInternalDataSize(this) + "字节"
         }
         btn_get_external_size.setOnClickListener {
-            tv_external_size.text = " "+ Storage.getExternalDataSize(this)+"字节"
+            tv_external_size.text = " " + Storage.getExternalDataSize(this) + "字节"
         }
         btn_get_storage_size.setOnClickListener {
-            tv_storage_size.text = ""+Storage.getDataSize(this)+"字节"
+            tv_storage_size.text = "" + Storage.getDataSize(this) + "字节"
         }
 
         btn_clear_Internal.setOnClickListener {
@@ -65,6 +66,10 @@ class MainActivity : AppCompatActivity() {
         }
         btn_clear_storage.setOnClickListener {
             Storage.clearData(this)
+        }
+
+        btn_sqlite.setOnClickListener {
+            startActivity(Intent(this, SqliteActivity::class.java))
         }
     }
 }

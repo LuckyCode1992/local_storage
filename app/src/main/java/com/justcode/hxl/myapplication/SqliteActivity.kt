@@ -235,6 +235,25 @@ class SqliteActivity : AppCompatActivity() {
                             }
             )
         }
+        btn_add_gender.setOnClickListener {
+            listSubscribe.add(
+                    Observable.just("hello", "mark", "ding")
+                            .map {
+                                val user = userDao.getUsersByName(it)[0]
+                                if (it == "ding") {
+                                    user.gender = "女"
+                                } else {
+                                    user.gender = "男"
+                                }
+                                userDao.update(user)
+                            }
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidScheduler.mainThread())
+                            .subscribe {
+
+                            }
+            )
+        }
 
 
     }

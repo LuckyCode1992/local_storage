@@ -1,6 +1,7 @@
 package com.justcode.hxl.localstorage.sqlite.user;
 
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -12,6 +13,16 @@ public class User {
     private int age;
     private String name;
     private Long carownerNo;
+//    @ColumnInfo(name = "gender")
+    private String gender;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 
     public Long getCarownerNo() {
         return carownerNo;
@@ -52,6 +63,7 @@ public class User {
                 ", age=" + age +
                 ", name='" + name + '\'' +
                 ", carownerNo=" + carownerNo +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }

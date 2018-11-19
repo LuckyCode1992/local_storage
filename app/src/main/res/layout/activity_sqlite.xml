@@ -5,69 +5,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Sqlite2Activity">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_insert"
-                android:text="插入user"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="插入user" />
+
             <Button
                 android:id="@+id/btn_insert_car"
-                android:text="插入car"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="插入car" />
+
             <Button
                 android:id="@+id/btn_update"
-                android:text="更新user第一条数据"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="更新user第一条数据" />
 
             <Button
                 android:id="@+id/btn_querry_all"
-                android:text="查询所有user"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="查询所有user" />
+
             <Button
                 android:id="@+id/btn_querry_all_car"
-                android:text="查询所有car"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="查询所有car" />
+
             <Button
                 android:id="@+id/btn_querry_name"
-                android:text="按名字查询user"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="按名字查询user" />
+
             <Button
                 android:id="@+id/btn_querry_age"
-                android:text="按年龄查询user"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="按年龄查询user" />
+
             <Button
                 android:id="@+id/btn_querry_age1_age2"
-                android:text="按年龄查询 user 19-25"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="按年龄查询 user 19-25" />
+
             <Button
-            android:id="@+id/btn_del"
-            android:text="删除user表所有数据"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                android:id="@+id/btn_del"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="删除user表所有数据" />
 
             <Button
                 android:id="@+id/btn_del_car"
-                android:text="删除car表所有数据"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="删除car表所有数据" />
+
             <Button
                 android:id="@+id/btn_querry_mark_car"
-                android:text="看看mark有哪些车"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="看看mark有哪些车" />
+            <Button
+                android:id="@+id/btn_add_gender"
+                android:text="新增性别，并添加属性"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

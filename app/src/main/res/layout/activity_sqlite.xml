@@ -15,7 +15,7 @@
 
             <Button
                 android:id="@+id/btn_insert"
-                android:text="插入name"
+                android:text="插入"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -32,6 +32,16 @@
             <Button
                 android:id="@+id/btn_querry_age"
                 android:text="按年龄查询"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_querry_age1_age2"
+                android:text="按年龄查询19-25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_del"
+                android:text="删除此表所有数据"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView

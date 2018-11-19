@@ -19,10 +19,14 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE age=:age")
     List<User> getUsersByAge(int age);
 
+    @Query("SELECT * FROM user WHERE name=:name")
+    List<User> getUsersByName(String name);
+
     @Query("SELECT * FROM user WHERE age=:age LIMIT :max")
     List<User> getUsersByAge(int max, int... age);
 
-
+    @Query("SELECT * FROM user WHERE age >=:age1 AND age<=:age2")
+    List<User> getUserAgeBya1a2(int age1, int age2);
 
 
     @Insert
@@ -41,6 +45,9 @@ public interface UserDao {
     @Delete
     void delete(User... users);
 
+
+    @Query("DELETE  FROM user")
+    void deleteALL();
 
 
 }

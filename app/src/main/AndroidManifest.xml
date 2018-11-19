@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SqliteActivity" />
+        <activity android:name=".SqliteActivity" android:screenOrientation="portrait"/>
         <activity android:name=".Sqlite2Activity"></activity>
     </application>
 

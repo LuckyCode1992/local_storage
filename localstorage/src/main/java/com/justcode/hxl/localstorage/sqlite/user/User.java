@@ -11,6 +11,15 @@ public class User {
     private Long id;
     private int age;
     private String name;
+    private Long carownerNo;
+
+    public Long getCarownerNo() {
+        return carownerNo;
+    }
+
+    public void setCarownerNo(Long carownerNo) {
+        this.carownerNo = carownerNo;
+    }
 
     public Long getId() {
         return id;
@@ -42,6 +51,7 @@ public class User {
                 "id=" + id +
                 ", age=" + age +
                 ", name='" + name + '\'' +
+                ", carownerNo=" + carownerNo +
                 '}';
     }
 }

@@ -5,8 +5,11 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import com.justcode.hxl.localstorage.sqlite.car.Car;
+import com.justcode.hxl.localstorage.sqlite.car.CarDao;
 
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+
+@Database(entities = {User.class, Car.class}, version = 1, exportSchema = false)
 public abstract class UserDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "UserDatabase.db";
@@ -29,5 +32,5 @@ public abstract class UserDatabase extends RoomDatabase {
 
     public abstract UserDao getUserDao();
 
-
+    public abstract CarDao getCarDao();
 }

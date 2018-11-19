@@ -44,7 +44,25 @@ class SqliteActivity : AppCompatActivity() {
 
 
         }
+        btn_update.setOnClickListener {
+            val user = User()
+            user.id = 35
+            user.age = 100
+            user.name = "hello 我是更新"
+            listSubscribe.add(
+                    Observable.just(user)
+                            .map {
+                                return@map userDao.update(user)
+                            }.subscribeOn(Schedulers.io())
+                            .observeOn(AndroidScheduler.mainThread())
+                            .subscribe {
 
+                            }
+
+            )
+
+
+        }
         btn_querry_all.setOnClickListener {
             listSubscribe.add(
                     Observable.just(0)
@@ -73,14 +91,17 @@ class SqliteActivity : AppCompatActivity() {
             )
         }
         btn_querry_age1_age2.setOnClickListener {
-            Observable.just(0)
-                    .map {
-                        return@map userDao.getUserAgeBya1a2(19, 25)
-                    }.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidScheduler.mainThread())
-                    .subscribe {
-                        tv_querry.text = it.toString()
-                    }
+            listSubscribe.add(
+                    Observable.just(0)
+                            .map {
+                                return@map userDao.getUserAgeBya1a2(19, 25)
+                            }.subscribeOn(Schedulers.io())
+                            .observeOn(AndroidScheduler.mainThread())
+                            .subscribe {
+                                tv_querry.text = it.toString()
+                            }
+            )
+
         }
         btn_querry_name.setOnClickListener {
             listSubscribe.add(

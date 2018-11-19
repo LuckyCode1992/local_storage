@@ -18,6 +18,11 @@
                 android:text="插入"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_update"
+                android:text="更新第一条数据"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/btn_querry_all"

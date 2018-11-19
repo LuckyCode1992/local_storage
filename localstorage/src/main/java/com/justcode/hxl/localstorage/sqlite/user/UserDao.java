@@ -39,8 +39,10 @@ public interface UserDao {
     void insert(List<User> userLists);
     //其他方法同理
 
+
     @Update
     void update(User... users);
+    //更新，其实就是覆盖
 
     @Delete
     void delete(User... users);

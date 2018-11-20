@@ -15,6 +15,15 @@ public class User {
     private Long carownerNo;
 //    @ColumnInfo(name = "gender")
     private String gender;
+    private int home_size;
+
+    public int getHome_size() {
+        return home_size;
+    }
+
+    public void setHome_size(int home_size) {
+        this.home_size = home_size;
+    }
 
     public String getGender() {
         return gender;
@@ -64,6 +73,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", carownerNo=" + carownerNo +
                 ", gender='" + gender + '\'' +
+                ", home_size=" + home_size +
                 '}';
     }
 }

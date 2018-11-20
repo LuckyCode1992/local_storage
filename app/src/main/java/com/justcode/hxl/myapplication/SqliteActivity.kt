@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.justcode.hxl.localstorage.sqlite.AndroidScheduler
 import com.justcode.hxl.localstorage.sqlite.car.Car
+import com.justcode.hxl.localstorage.sqlite.car.CarDao
 import com.justcode.hxl.localstorage.sqlite.user.User
+import com.justcode.hxl.localstorage.sqlite.user.UserDao
 import com.justcode.hxl.localstorage.sqlite.user.UserDatabase
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -17,21 +19,16 @@ class SqliteActivity : AppCompatActivity() {
 
     val listSubscribe: MutableList<Disposable> = ArrayList()
 
-    val userDao by lazy {
-        val userDao = UserDatabase.getInstance(this)
-                .userDao
-        userDao
-    }
-    val carDao by lazy {
-        val carDao = UserDatabase.getInstance(this).carDao
-        carDao
-    }
+    var userDao: UserDao? = null
+    var carDao: CarDao? = null
     var isInsertUser = false
     var isInsertCar = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sqlite)
-
+        var userDatabase = UserDatabase.create(this)
+        userDao = userDatabase.userDao
+        carDao = userDatabase.carDao
 
         btn_insert_car.setOnClickListener {
             if (isInsertCar) {
@@ -64,7 +61,7 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just(0)
                             .map {
-                                return@map carDao.insert(car1, car2, car3, car4)
+                                return@map carDao?.insert(car1, car2, car3, car4)
                             }
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
@@ -97,7 +94,7 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just(0)
                             .map {
-                                return@map userDao.insert(user1, user2, user3)
+                                return@map userDao?.insert(user1, user2, user3)
                             }
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
@@ -116,7 +113,7 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just(user)
                             .map {
-                                return@map userDao.update(user)
+                                return@map userDao?.update(user)
                             }.subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
                             .subscribe {
@@ -131,7 +128,7 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just(0)
                             .map {
-                                return@map userDao.allUser
+                                return@map userDao?.allUser
                             }.subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
                             .subscribe {
@@ -145,7 +142,7 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just(0)
                             .map {
-                                return@map carDao.allCar
+                                return@map carDao?.allCar
                             }
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
@@ -159,7 +156,7 @@ class SqliteActivity : AppCompatActivity() {
                     Observable.just(19)
 
                             .map {
-                                return@map userDao.getUsersByAge(it)
+                                return@map userDao?.getUsersByAge(it)
                             }.subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
                             .subscribe {
@@ -171,7 +168,7 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just(0)
                             .map {
-                                return@map userDao.getUserAgeBya1a2(19, 25)
+                                return@map userDao?.getUserAgeBya1a2(19, 25)
                             }.subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
                             .subscribe {
@@ -184,7 +181,7 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just("lucky4")
                             .map {
-                                return@map userDao.getUsersByName(it)
+                                return@map userDao?.getUsersByName(it)
                             }
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
@@ -198,7 +195,7 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just(0)
                             .map {
-                                return@map userDao.deleteALL()
+                                return@map userDao?.deleteALL()
                             }
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
@@ -212,7 +209,7 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just(0)
                             .map {
-                                return@map carDao.deleteALL()
+                                return@map carDao?.deleteALL()
                             }
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
@@ -226,7 +223,7 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just(0)
                             .map {
-                                return@map carDao.getCarbyCarownerNo(userDao.getUsersByName("mark")[0].carownerNo)
+                                return@map carDao?.getCarbyCarownerNo(userDao?.getUsersByName("mark")!![0].carownerNo)
                             }
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
@@ -239,13 +236,13 @@ class SqliteActivity : AppCompatActivity() {
             listSubscribe.add(
                     Observable.just("hello", "mark", "ding")
                             .map {
-                                val user = userDao.getUsersByName(it)[0]
+                                val user = userDao?.getUsersByName(it)!![0]
                                 if (it == "ding") {
                                     user.gender = "女"
                                 } else {
                                     user.gender = "男"
                                 }
-                                userDao.update(user)
+                                return@map userDao?.update(user)
                             }
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidScheduler.mainThread())
@@ -254,6 +251,12 @@ class SqliteActivity : AppCompatActivity() {
                             }
             )
         }
+        btn_update_table.setOnClickListener {
+            val database = UserDatabase.create(this)
+            userDao = database.userDao
+            carDao = database.carDao
+        }
+
 
 
     }

@@ -85,6 +85,11 @@
                 android:text="新增性别，并添加属性"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_update_table"
+                android:text="更新数据库"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/tv_querry"
